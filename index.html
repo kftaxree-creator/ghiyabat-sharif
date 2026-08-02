@@ -1,106 +1,73 @@
 <!DOCTYPE html>
 <html lang="ku" dir="rtl">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>خشتەی غیاب</title>
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
 body{
-background:#eef3f8;
+font-family:Arial,sans-serif;
+background:#f3f5f9;
 padding:20px;
 }
 
-.container{
-max-width:950px;
+.box{
+max-width:800px;
 margin:auto;
-background:#fff;
+background:white;
 padding:20px;
-border-radius:18px;
-box-shadow:0 10px 25px rgba(0,0,0,.15);
+border-radius:15px;
+box-shadow:0 0 15px #ccc;
 }
 
 .logo{
+width:110px;
 display:block;
 margin:auto;
-width:120px;
-margin-bottom:15px;
 }
 
-h1{
+h2{
 text-align:center;
 color:#0d6efd;
-margin-bottom:20px;
 }
 
 table{
 width:100%;
 border-collapse:collapse;
-margin-top:15px;
+margin-top:20px;
+}
+
+th,td{
+border:1px solid #ccc;
+padding:10px;
+text-align:center;
 }
 
 th{
 background:#0d6efd;
 color:white;
-padding:12px;
-}
-
-td{
-border:1px solid #ddd;
-padding:10px;
-text-align:center;
 }
 
 input[type=text]{
-width:100%;
-padding:8px;
-border-radius:8px;
-border:1px solid #ccc;
-}
-
-input[type=date]{
+width:95%;
 padding:6px;
-border-radius:8px;
 }
 
 input[type=checkbox]{
 transform:scale(1.4);
-cursor:pointer;
 }
 
-.btn{
-width:100%;
-padding:14px;
+button{
 margin-top:15px;
-background:#198754;
-color:white;
+padding:10px 20px;
 border:none;
 border-radius:10px;
+background:#198754;
+color:white;
 font-size:18px;
-font-weight:bold;
 cursor:pointer;
-}
-
-.btn:hover{
-background:#157347;
-}
-
-.total{
-margin-top:20px;
-font-size:22px;
-font-weight:bold;
-color:#dc3545;
-text-align:center;
 }
 
 </style>
@@ -109,17 +76,15 @@ text-align:center;
 
 <body>
 
-<div class="container">
+<div class="box">
 
 <img src="Kfta.PNG" class="logo">
 
-<h1>خشتەی غیاب</h1>
-<table id="attendanceTable">
-
+<h2>خشتەی غیاب</h2>
+<table id="table">
 <tr>
 <th>ژمارە</th>
 <th>ناو</th>
-<th>بەروار</th>
 <th>غیاب</th>
 <th>غەرامە $</th>
 </tr>
@@ -127,75 +92,39 @@ text-align:center;
 <tr>
 <td>1</td>
 <td><input type="text" id="name1"></td>
-<td><input type="date" id="date1"></td>
-<td style="text-align:center;">
-<input type="checkbox" id="abs1" onchange="updateFine(1)">
-</td>
+<td><input type="checkbox" id="abs1" onchange="updateFine(1)"></td>
 <td id="fine1">0$</td>
 </tr>
 
 <tr>
 <td>2</td>
 <td><input type="text" id="name2"></td>
-<td><input type="date" id="date2"></td>
-<td style="text-align:center;">
-<input type="checkbox" id="abs2" onchange="updateFine(2)">
-</td>
+<td><input type="checkbox" id="abs2" onchange="updateFine(2)"></td>
 <td id="fine2">0$</td>
 </tr>
 
 <tr>
 <td>3</td>
 <td><input type="text" id="name3"></td>
-<td><input type="date" id="date3"></td>
-<td style="text-align:center;">
-<input type="checkbox" id="abs3" onchange="updateFine(3)">
-</td>
+<td><input type="checkbox" id="abs3" onchange="updateFine(3)"></td>
 <td id="fine3">0$</td>
-</tr>
-
-<tr>
-<td>4</td>
-<td><input type="text" id="name4"></td>
-<td><input type="date" id="date4"></td>
-<td style="text-align:center;">
-<input type="checkbox" id="abs4" onchange="updateFine(4)">
-</td>
-<td id="fine4">0$</td>
-</tr>
-
-<tr>
-<td>5</td>
-<td><input type="text" id="name5"></td>
-<td><input type="date" id="date5"></td>
-<td style="text-align:center;">
-<input type="checkbox" id="abs5" onchange="updateFine(5)">
-</td>
-<td id="fine5">0$</td>
 </tr>
 
 </table>
 
-<div class="total">
+<h3>
 کۆی غەرامە:
-<span id="totalFine">0$</span>
-</div>
+<span id="total">0$</span>
+</h3>
 
-<button class="btn" onclick="saveData()">
-💾 Save
-</button>
-<div style="margin-top:20px;">
-<button class="btn" onclick="addRow()">➕ زیادکردنی خوێندکار</button>
-</div>
-
+<button onclick="saveData()">💾 Save</button>
 <script>
 
-let totalFine = 0;
+function updateFine(i){
 
-function updateFine(row){
+let fine=document.getElementById("fine"+i);
 
-const check = document.getElementById("abs"+row);
-const fine = document.getElementById("fine"+row);
+let check=document.getElementById("abs"+i);
 
 if(check.checked){
 fine.innerHTML="-5000$";
@@ -203,117 +132,52 @@ fine.innerHTML="-5000$";
 fine.innerHTML="0$";
 }
 
-calculateTotal();
+let total=0;
 
-}
+for(let x=1;x<=3;x++){
 
-function calculateTotal(){
-
-totalFine=0;
-
-for(let i=1;i<=100;i++){
-
-const fine=document.getElementById("fine"+i);
-
-if(fine){
-
-if(fine.innerHTML=="-5000$"){
-totalFine+=5000;
+if(document.getElementById("abs"+x).checked){
+total-=5000;
 }
 
 }
 
-}
-
-document.getElementById("totalFine").innerHTML="-"+totalFine+"$";
+document.getElementById("total").innerHTML=total+"$";
 
 }
 
 function saveData(){
 
-const data=[];
+for(let i=1;i<=3;i++){
 
-for(let i=1;i<=100;i++){
+localStorage.setItem("name"+i,
+document.getElementById("name"+i).value);
 
-const name=document.getElementById("name"+i);
-const date=document.getElementById("date"+i);
-const abs=document.getElementById("abs"+i);
-
-if(name){
-
-data.push({
-
-name:name.value,
-date:date.value,
-abs:abs.checked
-
-});
+localStorage.setItem("abs"+i,
+document.getElementById("abs"+i).checked);
 
 }
 
-}
-
-localStorage.setItem("attendance",JSON.stringify(data));
-
-alert("✅ بە سەرکەوتوویی Save کرا.");
+alert("Save بوو ✅");
 
 }
 
-function loadData(){
+window.onload=function(){
 
-const data=JSON.parse(localStorage.getItem("attendance"));
+for(let i=1;i<=3;i++){
 
-if(!data) return;
+document.getElementById("name"+i).value=
+localStorage.getItem("name"+i)||"";
 
-data.forEach((item,index)=>{
-
-const i=index+1;
-
-document.getElementById("name"+i).value=item.name;
-document.getElementById("date"+i).value=item.date;
-document.getElementById("abs"+i).checked=item.abs;
+document.getElementById("abs"+i).checked=
+localStorage.getItem("abs"+i)=="true";
 
 updateFine(i);
 
-});
-
 }
-
-window.onload=loadData;
-function addRow(){
-
-const table=document.getElementById("attendanceTable");
-
-const rowCount=table.rows.length;
-
-const row=table.insertRow();
-
-row.innerHTML=`
-<td>${rowCount}</td>
-
-<td>
-<input type="text" id="name${rowCount}">
-</td>
-
-<td>
-<input type="date" id="date${rowCount}">
-</td>
-
-<td style="text-align:center;">
-<input type="checkbox"
-id="abs${rowCount}"
-onchange="updateFine(${rowCount})">
-</td>
-
-<td id="fine${rowCount}">0$</td>
-`;
 
 }
 
 </script>
 
 </div>
-
-</body>
-
-</html>
