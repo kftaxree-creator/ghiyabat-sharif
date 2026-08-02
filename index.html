@@ -1,283 +1,98 @@
 <!DOCTYPE html>
 <html lang="ku" dir="rtl">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>خشتەی غیاب</title>
+<title>غیابات شەریف</title>
 
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
-}
-
 body{
-background:#111;
-padding:20px;
-color:white;
+    font-family:Arial,sans-serif;
+    background:#f4f6f9;
+    margin:20px;
 }
-
-.container{
-max-width:900px;
-margin:auto;
-background:#1b1b1b;
-padding:20px;
-border-radius:15px;
-box-shadow:0 0 20px red;
-}
-
-.logo{
-width:120px;
-display:block;
-margin:auto;
-}
-
 h1{
-text-align:center;
-margin:15px 0;
-color:#ff3b3b;
+    text-align:center;
+    color:#2563eb;
 }
-
-button{
-background:#d60000;
-color:white;
-border:none;
-padding:8px 15px;
-border-radius:8px;
-cursor:pointer;
-}
-
-button:hover{
-background:red;
-}
-
 table{
-width:100%;
-border-collapse:collapse;
-margin-top:20px;
+    width:100%;
+    border-collapse:collapse;
+    background:white;
 }
-
+th,td{
+    border:1px solid #ccc;
+    padding:10px;
+    text-align:center;
+}
 th{
-background:#d60000;
-padding:10px;
+    background:#2563eb;
+    color:white;
 }
-
-td{
-background:#222;
-padding:10px;
-text-align:center;
-border:1px solid #444;
-}
-
 input{
-width:100%;
-padding:8px;
-background:#333;
-color:white;
-border:none;
-text-align:center;
+    width:95%;
+    padding:5px;
 }
-
-.total{
-margin-top:20px;
-background:#d60000;
-padding:15px;
-text-align:center;
-font-size:22px;
-border-radius:10px;
+button{
+    padding:10px 20px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
 }
-
 </style>
-
 </head>
 
 <body>
 
-<div class="container">
+<h1>📋 غیابات شەریف</h1>
 
-<img src="Kfta.PNG" class="logo">
-
-<h1>خشتەی غیاب</h1>
-<table>
-
+<table id="table">
+<thead>
 <tr>
 <th>#</th>
-<th>ناو</th>
+<th>ناوی پلەیێر</th>
 <th>بەروار</th>
-<th>غیاب</th>
-<th>غەرامە $</th>
+<th>ئامادە</th>
+<th>غایب</th>
 </tr>
+</thead>
 
-<tr>
-<td>1</td>
+<tbody id="body">
 
-<td>
-<input type="text" id="name1" placeholder="ناوی خوێندکار">
-</td>
-
-<td>
-<input type="date" id="date1">
-</td>
-
-<td>
-<input type="checkbox" id="abs1">
-</td>
-
-<td>
-
-<button onclick="changeFine(1,-5000)">➖</button>
-
-<span id="fine1">0$</span>
-
-<button onclick="changeFine(1,5000)">➕</button>
-
-</td>
-
-</tr>
-
-<tr>
-<td>2</td>
-
-<td>
-<input type="text" id="name2" placeholder="ناوی خوێندکار">
-</td>
-
-<td>
-<input type="date" id="date2">
-</td>
-
-<td>
-<input type="checkbox" id="abs2">
-</td>
-
-<td>
-
-<button onclick="changeFine(2,-5000)">➖</button>
-
-<span id="fine2">0$</span>
-
-<button onclick="changeFine(2,5000)">➕</button>
-
-</td>
-
-</tr>
-
-<tr>
-<td>3</td>
-
-<td>
-<input type="text" id="name3" placeholder="ناوی خوێندکار">
-</td>
-
-<td>
-<input type="date" id="date3">
-</td>
-
-<td>
-<input type="checkbox" id="abs3">
-</td>
-
-<td>
-
-<button onclick="changeFine(3,-5000)">➖</button>
-
-<span id="fine3">0$</span>
-
-<button onclick="changeFine(3,5000)">➕</button>
-
-</td>
-
-</tr>
+</tbody>
 
 </table>
 
-<div class="total">
-
-کۆی غەرامە:
-<span id="totalFine">0$</span>
-
-</div>
-
 <br>
 
-<button onclick="saveData()">💾 Save</button>
+<button onclick="addRow()">➕ زیادکردنی پلەیێر</button>
+
 <script>
-let fines = [0,0,0];
 
-function updateFine(i){
-  if(document.getElementById("abs"+i).checked){
-    document.getElementById("fine"+i).innerHTML = fines[i-1] + "$";
-  }else{
-    document.getElementById("fine"+i).innerHTML = "0$";
-  }
+let number=1;
 
-  let total = 0;
+function addRow(){
 
-  for(let x=1;x<=3;x++){
-    if(document.getElementById("abs"+x).checked){
-      total += fines[x-1];
-    }
-  }
+let tr=document.createElement("tr");
 
-  document.getElementById("totalFine").innerHTML = total + "$";
+tr.innerHTML=`
+<td>${number++}</td>
+<td><input placeholder="ناوی پلەیێر"></td>
+<td><input type="date"></td>
+<td><input type="checkbox"></td>
+<td><input type="checkbox"></td>
+`;
+
+document.getElementById("body").appendChild(tr);
+
 }
 
-function changeFine(i,amount){
-  fines[i-1] += amount;
-
-  if(fines[i-1] < 0){
-    fines[i-1] = 0;
-  }
-
-  updateFine(i);
+for(let i=0;i<10;i++){
+addRow();
 }
 
-function saveData(){
-
-  for(let i=1;i<=3;i++){
-
-    localStorage.setItem("name"+i,
-      document.getElementById("name"+i).value);
-
-    localStorage.setItem("abs"+i,
-      document.getElementById("abs"+i).checked);
-
-    localStorage.setItem("fine"+i,
-      fines[i-1]);
-  }
-
-  alert("Save بوو ✅");
-}
-
-window.onload=function(){
-
-  let total = 0;
-
-  for(let i=1;i<=3;i++){
-
-    document.getElementById("name"+i).value =
-      localStorage.getItem("name"+i) || "";
-
-    document.getElementById("abs"+i).checked =
-      localStorage.getItem("abs"+i)=="true";
-
-    fines[i-1] =
-      parseInt(localStorage.getItem("fine"+i) || "0");
-
-    updateFine(i);
-
-    if(document.getElementById("abs"+i).checked){
-      total += fines[i-1];
-    }
-  }
-
-  document.getElementById("totalFine").innerHTML = total + "$";
-}
 </script>
 
 </body>
