@@ -4,45 +4,156 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>غیابات شەریف</title>
+
 <style>
-body{font-family:Arial;background:#f4f4f4;padding:20px}
-h1{text-align:center;color:#2563eb}
-table{width:100%;border-collapse:collapse;background:#fff}
-th,td{border:1px solid #ccc;padding:8px;text-align:center}
-th{background:#2563eb;color:#fff}
-input{width:95%}
-button{padding:10px 15px;margin-top:15px}
+body{
+font-family:Arial,sans-serif;
+background:#f4f4f4;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+background:#fff;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,.2);
+}
+
+.logo{
+width:90px;
+margin-bottom:10px;
+}
+
+h1{
+color:#2563eb;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th,td{
+border:1px solid #ccc;
+padding:8px;
+text-align:center;
+}
+
+th{
+background:#2563eb;
+color:white;
+}
+
+input{
+width:95%;
+padding:5px;
+}
+
+button{
+margin-top:20px;
+padding:10px 20px;
+font-size:16px;
+cursor:pointer;
+}
 </style>
 </head>
+
 <body>
+
+<div class="container">
+
+<img src="logo.png" class="logo">
 
 <h1>📋 غیابات شەریف</h1>
 
-<table id="tbl">
+<table>
+
 <tr>
 <th>#</th>
-<th>ناوی پلەیێر</th>
+<th>ناوی پەلەیەر</th>
 <th>بەروار</th>
 <th>غایب</th>
 </tr>
-</table>
 
-<button onclick="add()">➕ زیادکردنی خانە</button>
-
-<script>
-let n=1;
-function add(){
-let t=document.getElementById("tbl");
-let r=t.insertRow();
-r.innerHTML=`
-<td>${n++}</td>
+<tr>
+<td>1</td>
 <td><input></td>
 <td><input type="date"></td>
-<td><input type="checkbox"></td>
-`;
-}
-for(let i=0;i<10;i++) add();
-</script>
+<td><input></td>
+</tr>
+
+<tr>
+<td>2</td>
+<td><input></td>
+<td><input type="date"></td>
+<td><input></td>
+</tr>
+
+<tr>
+<td>3</td>
+<td><input></td>
+<td><input type="date"></td>
+<td><input></td>
+</tr>
+
+<tr>
+<td>4</td>
+<td><input></td>
+<td><input type="date"></td>
+<td><input></td>
+</tr>
+
+<tr>
+<td>5</td>
+<td><input></td>
+<td><input type="date"></td>
+<td><input></td>
+</tr>
+
+<tr>
+<td>6</td>
+<td><input></td>
+<td><input type="date"></td>
+<td><input></td>
+</tr>
+
+<tr>
+<td>7</td>
+<td><input></td>
+<td><input type="date"></td>
+<td><input></td>
+</tr>
+
+<tr>
+<td>8</td>
+<td><input></td>
+<td><input type="date"></td>
+<td><input></td>
+</tr>
+
+<tr>
+<td>9</td>
+<td><input></td>
+<td><input type="date"></td>
+<td><input></td>
+</tr>
+
+<tr>
+<td>10</td>
+<td><input></td>
+<td><input type="date"></td>
+<td><input></td>
+</tr>
+
+</table>
+
+<button onclick="window.print()">🖨 چاپکردن</button>
+
+</div>
 
 </body>
 </html>
