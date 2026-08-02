@@ -97,23 +97,3 @@ addRow();
 
 </body>
 </html>
-<button onclick="addRow()">+ زیادکردنی خانە</button>
-
-<script>
-function addRow() {
-    const tbody = document.getElementById("tableBody");
-
-    const rowCount = tbody.rows.length + 1;
-
-    const row = `
-    <tr>
-        <td>${rowCount}</td>
-        <td><input type="text" placeholder="ناو"></td>
-        <td><input type="checkbox"></td>
-        <td>0$</td>
-    </tr>
-    `;
-
-    tbody.insertAdjacentHTML("beforeend", row);
-}
-</script>
