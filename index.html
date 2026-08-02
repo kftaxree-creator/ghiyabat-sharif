@@ -155,7 +155,8 @@ document.getElementById("name"+i).value);
 
 localStorage.setItem("abs"+i,
 document.getElementById("abs"+i).checked);
-
+localStorage.setItem("fine"+i,
+document.getElementById("fine"+i).innerHTML);
 }
 
 alert("Save بوو ✅");
@@ -171,8 +172,11 @@ localStorage.getItem("name"+i)||"";
 
 document.getElementById("abs"+i).checked=
 localStorage.getItem("abs"+i)=="true";
+document.getElementById("fine"+i).innerHTML =
+localStorage.getItem("fine"+i) || "0$";
 
 updateFine(i);
+
 
 }
 
